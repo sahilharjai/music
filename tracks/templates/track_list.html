@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block head_title %}Music{% endblock head_title %}
+{% block content %}
+<div class="row">
+    <div class="col s12 m8 l6 offset-m3 offset-l4">
+    	<h1>Track's</h1>
+	</div>
+
+{% for obj in track_list %}
+<div class="row">
+     <div class="col s12 m8 l6 offset-m2 offset-l3">
+         <div class="card-panel">
+             <h4> <a href="{% url 'detail' id=obj.id %}">Title: {{ obj.title }} </a></h4>
+             <p><a href="{% url 'detail-genre' id=obj.genres.id %}">Genre: {{ obj.genres.genre_name }}</a></p>
+             <p>Rating: {{ obj.rating_of_track }}</p>
+         </div>
+     </div>
+ </div>
+{% endfor %}
+<div class="pagination col s12 offset-m2">
+    <span class="step-links">
+        {% if track_list.has_previous %}
+            <a href="?page={{ track_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ track_list.number }} of {{ track_list.paginator.num_pages }}.
+        </span>
+
+        {% if track_list.has_next %}
+            <a href="?page={{ track_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+<div class="row">
+    <div class="col s12 m8 l6 offset-m2 offset-l3">
+    	<a href="{% url 'create' %}">
+    		<button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light left">Add Track</button></a>
+            
+            <a href="{% url 'create-genre' %}">
+            <button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light left">Add Genre</button>
+            
+        </a>
+    	
+    </div>
+</div>
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+ 

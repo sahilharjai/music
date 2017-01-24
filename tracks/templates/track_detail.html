@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block link %} {% endblock %}
+{% block page_title %}Music{% endblock %}
+{% load material_form %}
+ {% block content %}
+ <div class="row">
+     <div class="col s12 m8 l6 offset-m2 offset-l3">
+         <div class="card-panel">
+             <h4> Title: {{ instance.title }} </h4>
+             
+             <p><a href="{% url 'detail-genre' id=instance.genres.id %}">Genre: {{ instance.genres.genre_name }}</a></p>
+             <p>Rating: {{ instance.rating_of_track }}</p>
+         </div>
+     </div>
+     <div class="row">
+    <div class="col s12 m8 l6 offset-m2 offset-l3">
+    	<a href="{% url 'update' id=id %}">
+    		<button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light left">Edit Track</button>
+    	</a>
+    </div>
+</div>
+ </div>
+ {% endblock %}
