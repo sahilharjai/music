@@ -1,7 +1,7 @@
 from rest_framework.generics import (
 	ListAPIView,
 	RetrieveAPIView,
-	UpdateAPIView,
+	RetrieveUpdateAPIView,
 	CreateAPIView,
 	)
 from tracks.models import Track
@@ -22,7 +22,7 @@ class TrackDetailView(RetrieveAPIView):
 	queryset=Track.objects.all()
 	serializer_class=TrackDetailSerializer
 
-class TrackUpdateView(UpdateAPIView):
+class TrackUpdateView(RetrieveUpdateAPIView):
 	queryset=Track.objects.all()
 	serializer_class=TrackUpdateSerializer
 

@@ -7,6 +7,7 @@ from django.views.decorators.http import require_GET, require_POST,require_http_
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.http import Http404, JsonResponse, HttpResponse
 
 
 # Create your views here.
@@ -34,7 +35,13 @@ def track_list(request):
 
 
     
-
+@require_GET
+def search(request):
+	term=request.GET.get('term')
+	tracks=Track.objects.filter(title__icontains=term)[:3]	
+	
+	data=[{'track':t.title,'id':t.id} for t in tracks]
+	return JsonResponse({'data':data})
 
     
 @require_http_methods(['GET','POST'])
@@ -47,7 +54,8 @@ def track_create(request):
 		if form.is_valid():
 			title=form.cleaned_data['title']
 			gene=form.cleaned_data['genre']
-			track_obj=Track(title=title)
+			rate=form.cleaned_data['rating_of_track']
+			track_obj=Track(title=title,rating_of_track=rate)
 			obj=Genre.objects.filter(genre_name=gene)
 			if not obj:
 				
@@ -70,10 +78,11 @@ def track_update(request,id=None):
 	track_obj=get_object_or_404(Track,id=id)
 	obj={"title":track_obj.title,"genre":track_obj.genres.genre_name}
 	if request.method=='GET':
-		form=TrackUpdateForm()
+		form=TrackUpdateForm(instance=track_obj)
 	else:
-		form=TrackUpdateForm(request.POST)
+		form=TrackUpdateForm(request.POST,instance=track_obj)
 		if form.is_valid():
+			
 			track_obj=form.save()
 			return redirect(reverse('list'))
 	context = { 'form' : form }

@@ -1,10 +1,32 @@
+
 {% extends 'base.html' %}
-{% block head_title %}Music{% endblock head_title %}
+{% load staticfiles %}
+{% block head_title %}Music
+
+      
+
+{% endblock head_title %}
+
+
+
 {% block content %}
 <div class="row">
     <div class="col s12 m8 l6 offset-m3 offset-l4">
     	<h1>Track's</h1>
 	</div>
+    <div class="row" id="search1" style="
+    width: 100%;">
+      <form class='col s8 m8 l6 offset-s2 offset-m2 offset-l3 field'>
+        <div class="input-field">
+        <i class="fa fa-search prefix" aria-hidden="true"></i>
+          <input id="id_search" type="text" placeholder="Search Quizes" name="search">
+          <ul class="collection with-header serachul">
+          <li class="collection-header">Type Something On the Top!!</li>
+              
+          </ul>
+        </div>
+      </form>
+    </div>
 
 {% for obj in track_list %}
 <div class="row">
@@ -40,6 +62,9 @@
             
             <a href="{% url 'create-genre' %}">
             <button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light left">Add Genre</button>
+
+            <a href="{% url 'list-genre' %}">
+            <button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light left">View Genre</button>
             
         </a>
     	
@@ -48,6 +73,15 @@
 
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script src="{% static 'common/js/base.js' %}"></script>
+<script>
+    $(window).ready(function(){
+        Search.init();
+    });
+</script>
+ {% endblock %}
 
 
 

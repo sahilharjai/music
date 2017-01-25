@@ -3,14 +3,14 @@
 {% block content %}
 <div class="row">
     <div class="col s12 m8 l6 offset-m3 offset-l4">
-    	<h1>Track's</h1>
+    	<h1>Genre's</h1>
 	</div>
 </div>
-{% for obj in henre_list %}
+{% for obj in genre_list %}
 <div class="row">
      <div class="col s12 m8 l6 offset-m2 offset-l3">
          <div class="card-panel">
-             <p>{{ obj.genre_name }}</p>  
+             <p><a href="{% url 'detail-genre' id=obj.id %}">{{ obj.genre_name }}</a></p>  
          </div>
      </div>
  </div>

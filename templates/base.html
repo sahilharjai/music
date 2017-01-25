@@ -2,7 +2,10 @@
 <html>
     <head>
         <title> {% block page_title %} Music {% endblock %} </title>
-        {% block link %}{% endblock %}
+          <link href="{% static 'common/css/base.css' %}">
+        {% block link %}
+        
+        {% endblock %}
         {% include 'material/includes/material_css.html' %}
         {% block extrahead %} {% endblock %}
     </head>
