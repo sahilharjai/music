@@ -14,7 +14,7 @@ from django.http import Http404, JsonResponse, HttpResponse
 
 def track_list(request):
 	track_list=Track.objects.all();
-	paginator = Paginator(track_list, 25) # Show 25 contacts per page
+	paginator = Paginator(track_list, 2) # Show 25 contacts per page
 	page = request.GET.get('page')
 	try:
 		track = paginator.page(page)
