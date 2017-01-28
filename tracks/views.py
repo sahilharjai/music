@@ -56,17 +56,9 @@ def track_create(request):
 			gene=form.cleaned_data['genre']
 			rate=form.cleaned_data['rating_of_track']
 			track_obj=Track(title=title,rating_of_track=rate)
-			obj=Genre.objects.filter(genre_name=gene)
-			if not obj:
-				
-				obj=Genre.objects.create(genre_name=gene)
-				obj.save(force_insert=True)
-				track_obj.genres=obj
-			else:
-				track_obj.genres=obj[0]
-
-
 			
+			
+			track_obj.genres=gene
 			track_obj.save()
 			return redirect(reverse('list'))
 		else:
